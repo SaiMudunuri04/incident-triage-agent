@@ -1,0 +1,6 @@
+apiVersion: v2
+name: incident-triage-agent
+description: Incident triage agent service
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
