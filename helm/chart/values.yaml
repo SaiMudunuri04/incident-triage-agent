@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/saimudunuri04/incident-triage-agent
-  tag: "5c2e579c57099eca704794251300eb000a716828"
+  tag: "d3003bbc73cac5bfcbd08d01c388d2548d5169c5"
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 service:
