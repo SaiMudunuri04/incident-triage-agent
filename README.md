@@ -7,6 +7,10 @@ a container, Helm release, Argo CD application, and a CI workflow that builds an
 immutable GHCR image after tests pass. It is a reference implementation; it has not
 been deployed to a user's AWS account or Kubernetes cluster.
 
+## Start here
+
+**Problem:** assist incident triage without allowing an agent to take unsafe actions. **What this demonstrates:** a bounded plan-act-observe loop, read-only tools, an action allowlist, and summaries tied to successful observations. **Inspect first:** [`docs/architecture.md`](docs/architecture.md), [`src/service/app.py`](src/service/app.py), and the safety tests.
+
 ## Run
 
 ```sh
