@@ -30,7 +30,7 @@ provision AWS or a cluster.
 
 ## Configure and serve
 
-Mount approved Markdown runbooks and a JSON object of read-only numeric metrics. The planner can only `search_runbook`, `read_metric`, or `finish`; unrecognized actions produce an audit error. A strict step budget bounds the loop. The system never changes infrastructure.
+Mount approved Markdown runbooks and a JSON object of read-only numeric metrics. The planner can only `search_runbook`, `read_metric`, or `finish`; unrecognized actions produce an audit error. `finish` must cite successful tool observations as `step:N`, and a strict step budget bounds the loop. The system never changes infrastructure.
 
 ```sh
 RUNBOOK_ROOT=/path/runbooks METRICS_PATH=/path/metrics.json LLM_BASE_URL=https://your-model.example/v1 LLM_MODEL=your-model uvicorn service.app:app --host 127.0.0.1
