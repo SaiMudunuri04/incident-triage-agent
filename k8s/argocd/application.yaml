@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/SaiMudunuri04/incident-triage-agent.git
     targetRevision: main
-    path: helm/chart
+    path: k8s/helm/incident-triage-agent
   destination:
     server: https://kubernetes.default.svc
     namespace: incident-triage-agent

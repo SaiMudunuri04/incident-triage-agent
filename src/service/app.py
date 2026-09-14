@@ -9,8 +9,10 @@ from pydantic import BaseModel, Field
 
 from .agents import ReadOnlyTools, run_incident
 from .llm import ChatClient
+from .observability import RequestLoggingMiddleware
 
 app = FastAPI(title="Incident triage agent", version="0.1.0")
+app.add_middleware(RequestLoggingMiddleware)
 
 
 class Incident(BaseModel):
