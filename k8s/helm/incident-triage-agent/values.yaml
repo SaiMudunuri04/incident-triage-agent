@@ -76,5 +76,13 @@ networkPolicy:
   egressTo: []
 env: {}
 envFromSecretName: ""
+# Non-secret runtime configuration delivered as env vars via a ConfigMap.
+# Paths must match the volumes mounted into the pod (see `volumes`/`volumeMounts`).
+# Secrets (LLM_API_KEY) stay out of here; wire them via `envFromSecretName`.
+config:
+  enabled: true
+  data:
+    RUNBOOK_ROOT: "/data/runbooks"
+    METRICS_PATH: "/data/metrics.json"
 volumeMounts: []
 volumes: []
