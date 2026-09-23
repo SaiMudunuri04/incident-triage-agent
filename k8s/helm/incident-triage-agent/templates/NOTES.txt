@@ -1,0 +1,32 @@
+{{- /* NOTES.txt: post-install summary for the incident-triage-agent release. */ -}}
+Release {{ .Release.Name }} (chart {{ .Chart.Name }}-{{ .Chart.Version }}) is installed.
+
+1. Watch the rollout:
+   kubectl rollout status deployment/{{ include "service.fullname" . }} -n {{ .Release.Namespace }}
+
+2. Health endpoints:
+   kubectl port-forward svc/{{ include "service.fullname" . }} {{ .Values.service.port }}:{{ .Values.containerPort }} -n {{ .Release.Namespace }}
+   curl localhost:{{ .Values.service.port }}/health/live
+   curl localhost:{{ .Values.service.port }}/health/ready
+
+{{- if .Values.config.enabled }}
+3. Runtime configuration (ConfigMap {{ include "service.fullname" . }}-config):
+   RUNBOOK_ROOT={{ index .Values.config.data "RUNBOOK_ROOT" }} (mounted Markdown runbooks)
+   METRICS_PATH={{ index .Values.config.data "METRICS_PATH" }} (JSON object of read-only metrics)
+   Mount the runbook/metrics volumes via `volumes` and `volumeMounts`; the
+   readiness probe fails until they are present.
+{{- end }}
+
+4. Required operator-provided settings not in the ConfigMap:
+   LLM_BASE_URL / LLM_MODEL -- set via `.Values.env` (HTTPS or localhost only);
+     /triage returns 503 without an inference endpoint.
+   LLM_API_KEY -- never in Helm values; set `.Values.envFromSecretName` to a
+     Secret managed by a cluster secret manager.
+
+{{- if .Values.autoscaling.enabled }}
+5. Horizontal autoscaling is enabled (min {{ .Values.autoscaling.minReplicas }}, max {{ .Values.autoscaling.maxReplicas }}).
+{{- end }}
+{{- if .Values.networkPolicy.enabled }}
+6. NetworkPolicy is enabled; review `networkPolicy.ingressFrom`/`egressTo` before
+   exposing the service, and ensure the LLM egress endpoint is reachable.
+{{- end }}
