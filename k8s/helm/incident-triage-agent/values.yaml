@@ -6,7 +6,7 @@ podLabels: {}
 podAnnotations: {}
 image:
   repository: ghcr.io/saimudunuri04/incident-triage-agent
-  tag: "545d4ef2ad0726438e9533847d9b29ffaa33a007"
+  tag: "637e23b0df343f0f0464028359cfac6162fd635a"
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 serviceAccount:
